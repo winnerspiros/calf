@@ -19,15 +19,15 @@ endif()
 # libcalf.a
 #
 if(MSVC)
-    add_library(${PROJECT_NAME} STATIC audio_fx.cpp analyzer.cpp lv2wrap.cpp metadata.cpp modules_tools.cpp modules_delay.cpp modules_comp.cpp modules_limit.cpp modules_dist.cpp modules_filter.cpp modules_mod.cpp modules_pitch.cpp fluidsynth.cpp giface.cpp monosynth.cpp organ.cpp osctl.cpp plugin.cpp preset.cpp synth.cpp utils.cpp wavetable.cpp modmatrix.cpp pffft.c shaping_clipper.cpp)
+    add_library(${PROJECT_NAME} STATIC audio_fx.cpp analyzer.cpp lv2wrap.cpp metadata.cpp modules_tools.cpp modules_delay.cpp modules_comp.cpp modules_limit.cpp modules_filter.cpp modules_mod.cpp modules_pitch.cpp giface.cpp monosynth.cpp organ.cpp osctl.cpp plugin.cpp preset.cpp synth.cpp utils.cpp wavetable.cpp modmatrix.cpp pffft.c shaping_clipper.cpp)
 else()
-    add_library(${PROJECT_NAME} audio_fx.cpp analyzer.cpp lv2wrap.cpp metadata.cpp modules_tools.cpp modules_delay.cpp modules_comp.cpp modules_limit.cpp modules_dist.cpp modules_filter.cpp modules_mod.cpp modules_pitch.cpp fluidsynth.cpp giface.cpp monosynth.cpp organ.cpp osctl.cpp plugin.cpp preset.cpp synth.cpp utils.cpp wavetable.cpp modmatrix.cpp pffft.c shaping_clipper.cpp)
+    add_library(${PROJECT_NAME} audio_fx.cpp analyzer.cpp lv2wrap.cpp metadata.cpp modules_tools.cpp modules_delay.cpp modules_comp.cpp modules_limit.cpp modules_filter.cpp modules_mod.cpp modules_pitch.cpp giface.cpp monosynth.cpp organ.cpp osctl.cpp plugin.cpp preset.cpp synth.cpp utils.cpp wavetable.cpp modmatrix.cpp pffft.c shaping_clipper.cpp)
 endif()
 
 target_include_directories(${PROJECT_NAME} PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
 
-target_include_directories(${PROJECT_NAME} PRIVATE ${EXPAT_INCLUDE_DIRS} ${FluidSynth_INCLUDE_DIRS})
-target_link_libraries(${PROJECT_NAME} PUBLIC Threads::Threads ${EXPAT_LIBRARIES} fluidsynth)
+target_include_directories(${PROJECT_NAME} PRIVATE ${EXPAT_INCLUDE_DIRS})
+target_link_libraries(${PROJECT_NAME} PUBLIC Threads::Threads ${EXPAT_LIBRARIES})
 
 if(USE_GUI)
     target_include_directories(${PROJECT_NAME} PRIVATE ${GTK_INCLUDE_DIRS})
@@ -94,9 +94,11 @@ endif()
 # calfmakerdf
 #
 
+if(USE_FLUIDSYNTH)
 add_executable(${PROJECT_NAME}makerdf makerdf.cpp)
 target_include_directories(${PROJECT_NAME}makerdf PRIVATE ${CMAKE_CURRENT_SOURCE_DIR} ${EXPAT_INCLUDE_DIRS})
 target_link_libraries(${PROJECT_NAME}makerdf PRIVATE ${PROJECT_NAME} Threads::Threads ${EXPAT_LIBRARIES} fluidsynth)
+endif()
 
 #
 # install

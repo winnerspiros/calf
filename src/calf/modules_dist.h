@@ -29,7 +29,11 @@
 #include "giface.h"
 #include "metadata.h"
 #include "plugin_tools.h"
+#ifdef HAVE_FLUIDSYNTH
 #include <fluidsynth.h>
+#else
+#include "fluidsynth_stub.h"
+#endif
 #include "shaping_clipper.h"
 
 
