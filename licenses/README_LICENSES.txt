@@ -1,6 +1,6 @@
 CALF (this project)
 -------------------
-License: GPL-2.1-only
+License: LGPL-2.1-only
 Source: https://github.com/calf-studio-gear/calf
 
 Third-party components included or linked:
